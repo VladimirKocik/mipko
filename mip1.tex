@@ -6,7 +6,8 @@
 \usepackage{graphicx}
 \usepackage{url} % príkaz \url na formátovanie URL
 \usepackage{hyperref}
-
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
 \usepackage{cite}
 
 \pagestyle{headings}
@@ -34,12 +35,25 @@ Vývoj autonómnych vozidiel neustále pokračuje, a každým dňom sa stávajú
 \end{abstract}
 
 \section{Úvod} 
+
 Pri autonómnych vozidlách je kľúčové presné zaznamenanie prostredia, lokalizácia, mapovanie a iné technológie ktoré čerpajú dáta z kamery, taktiež GPS, IMU(Inertial Measurement Unit), odometria kolies, senzory LIDAR(Light Detection and Ranging) 
 
 
 \cite{6629552}
 
 \section{Rozpoznávanie čiar na ceste}
+
+Prvé algoritmy vychádzajúce z algoritmu videnia boli veľmi nepresné, a preto boli často spájané s inými algoritmami, ktoré filtrovali farby, hrany, pracovali s perspektívou a metódami ako Sobel, sliding widows search (SWS), the least-squares methond(LMS) a bird-eye view(BEV). Pomocou týchto filtrov dokázal algoritmus rozpoznať rovné čiary na ceste, no po niekoľkých testovaniach sa zistilo že je to stále veľmi nepresné, pretože sa na ceste môže nachádzať veľa rušivých faktorov, či sú to objekty na ceste, vozidlá, svetlosť, stav vozovky alebo aj zlé počasie. 
+Preto veľmi dôležitou časťou rozpoznávania čiar je použitie algoritmov pre supervised and unsupervised learning. Použitím neurálnych sietí -convolutional neural networks (CNNs), a známy CNN model, AlexNet bol navrhnutý a je okolo neho postavených mnoho algoritmov. Neustálym zberom dát a obrovským množstvom iterácií sa presnosť stále zvyšuje.
+
+Metóda pre rozpoznávanie čiar na základe unsupervised learning algoritmu je odstrániť z obrazu všetky nedôležité údaje, tak aby ostaly len hlavné hrany. Na to je v tomto prípade použitý algoritmus Canny. Ďalej, aby sa predišlo falošnému pozitívu, sú pomocou ROI (Regions of Interest) filtrované tie objekty, v ktorých sa nepredpokladá že sa v nich nachádzajú čiary ale práve iné objekty na základe ich pozície na obrazovke. Pre lepšie zobrazenie používame funkciu OpenCV aby sme sa dostali do BEV, teda vtáčiej perspektívy. Po transformácií sa použije SWS aby sa našiel rozdiel medzi pravou a ľavou čiarou. 
+
+\includegraphics{find_lanes2}
+
+
+
+
+
 \cite {KSII}
 \cite {9179748}
 \cite{tiis:22283}
